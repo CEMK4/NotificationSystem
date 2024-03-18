@@ -1,16 +1,17 @@
 package com.PersonalBank.NotificationSystem.services;
 
-import com.PersonalBank.NotificationSystem.models.BankCard;
+import com.PersonalBank.NotificationSystem.entities.BankCard;
 import com.PersonalBank.NotificationSystem.repositories.BankCardRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class BankCardService {
-    @Autowired
-    private BankCardRepository bankCardRepository;
+
+    private final BankCardRepository bankCardRepository;
 
     public List<BankCard> getAllBankCards() {
         return bankCardRepository.findAll();

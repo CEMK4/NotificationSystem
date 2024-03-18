@@ -1,18 +1,18 @@
 package com.PersonalBank.NotificationSystem.controllers;
 
+import com.PersonalBank.NotificationSystem.entities.BankCard;
 import com.PersonalBank.NotificationSystem.services.BankCardService;
-import com.PersonalBank.NotificationSystem.models.BankCard;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/bank-cards")
+@RequiredArgsConstructor
 public class BankCardController {
 
-    @Autowired
-    private BankCardService bankCardService;
+    private final BankCardService bankCardService;
 
     @GetMapping
     public ResponseEntity<?> getAllBankCards() {
