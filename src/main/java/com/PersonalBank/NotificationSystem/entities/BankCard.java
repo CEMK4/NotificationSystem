@@ -7,6 +7,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 
+import java.util.Calendar;
 import java.util.Date;
 
 @Entity
@@ -23,22 +24,35 @@ public class BankCard {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "client_id")
+    @JoinColumn
     private Client client;
 
-    @Size(min = 16, max = 16)
+    @Size(min = 16, max = 19)
     @NotBlank
     @NotEmpty
     @NotNull
     @Column(name = "card_number", unique = true)
     private String cardNumber;
 
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "issue_date")
     private Date issueDate;
 
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "expiry_date")
     private Date expiryDate;
+
+    public BankCard(Client client, String cardNumber, Date issueDate) {
+        this.client = client;
+        this.cardNumber = cardNumber;
+        this.issueDate = issueDate;
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(issueDate);
+        calendar.add(Calendar.MINUTE, 1);
+        Date nextDate = calendar.getTime();
+
+        this.expiryDate = nextDate;
+    }
 
 }

@@ -1,5 +1,6 @@
 package com.PersonalBank.NotificationSystem.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
@@ -24,8 +25,8 @@ public class Client {
     @Column(nullable = false, unique = true)
     private String fullName;
 
-    @ToString.Exclude
-    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "client", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<BankCard> bankCards = new LinkedHashSet<>();
 
     @Temporal(TemporalType.DATE)

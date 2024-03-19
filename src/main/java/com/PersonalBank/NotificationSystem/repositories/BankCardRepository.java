@@ -10,6 +10,10 @@ import java.util.List;
 
 public interface BankCardRepository extends JpaRepository<BankCard, Long> {
 
-    @Query("select b from BankCard b where b.expiryDate = :expiryDate")
+
+    @Query("select b from BankCard b where b.expiryDate <= :expiryDate")
     List<BankCard> findByExpiryDate(@Param("expiryDate") Date expiryDate);
+
+    boolean existsByCardNumber(String cardNumber);
+
 }

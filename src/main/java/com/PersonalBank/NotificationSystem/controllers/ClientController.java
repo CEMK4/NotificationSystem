@@ -22,6 +22,9 @@ public class ClientController {
 
     @PostMapping
     public ResponseEntity<?> createClient(@RequestBody ClientDto client) {
+        var clientId = clientService.checkClientExisting(client);
+        if (clientId != null)
+            return ResponseEntity.ok(clientId);
         Client createdClient = clientService.createClient(client);
         return new ResponseEntity<>(createdClient, HttpStatus.CREATED);
     }
