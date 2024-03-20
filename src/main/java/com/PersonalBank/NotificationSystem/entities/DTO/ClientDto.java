@@ -4,20 +4,26 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
-import lombok.Value;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 
 /**
- * DTO for {@link com.PersonalBank.NotificationSystem.entities.Client}
+ * Data Transfer Object (DTO) for representing Client information.
  */
 @Data
 public class ClientDto implements Serializable {
+    /**
+     * The full name of the client.
+     */
     @NotNull
     @NotEmpty
     @NotBlank
     String fullName;
+
+    /**
+     * The date of birth of the client.
+     */
     @NotNull
-    Date dateOfBirth;
+    LocalDate dateOfBirth;
 }

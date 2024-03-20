@@ -5,13 +5,16 @@ import lombok.Value;
 import org.hibernate.validator.constraints.Length;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 /**
- * DTO for {@link com.PersonalBank.NotificationSystem.entities.BankCard}
+ * Data Transfer Object (DTO) for representing BankCard information.
  */
 @Value
 public class BankCardDto implements Serializable {
+    /**
+     * The card number of the bank card.
+     */
     @NotNull
     @Size(min = 16, max = 19)
     @Pattern(regexp = "\\b\\d{4} ?\\d{4} ?\\d{4} ?\\d{4}\\b")
@@ -19,6 +22,10 @@ public class BankCardDto implements Serializable {
     @NotBlank
     @Length(min = 16)
     String cardNumber;
+
+    /**
+     * The issue date of the bank card.
+     */
     @NotNull
-    Date issueDate;
+    LocalDateTime issueDate;
 }
